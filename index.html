@@ -27,15 +27,21 @@
     </div>
     <script>   
       function success(data) { 
-        console.log("california")
-        if(data.nums == 0){
+        
+        if(data.num == -1){
           alert("Pick A Larger Number");
         }
-        else if(data.nums == -1){
+        else if(data.num == 1){
           alert("Pick a Smaller Number")
         }
         else{
-          alert("You Won The Game");
+          if(data.tries === 1){
+            alert("You Won The Game, It Took You 1 Guess");
+          }
+          else{
+            alert("You Won The Game, It Took You " + data.tries + " Guesses");
+          }
+          
         }
 
 
@@ -44,7 +50,7 @@
       
       function handleButtonClick(){
         $.get("/request", {index:$("#num").val()},success);
-        console.log("called")
+        
         return false;
       }
       
