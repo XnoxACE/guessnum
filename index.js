@@ -1,12 +1,10 @@
 var express = require('express');
 var app = express();
 const randommine = require('./myrandommodule');
-const { guessNum, storeNum } = require('./script');
+const { guessNum, storeNum, getNumTries } = require('./script');
 
 
-let computerNum = 10;
-let numTries;
-let obj;
+
 
 
 
@@ -20,14 +18,16 @@ app.get("/",function(request,response){
 
 
 app.get('/request', function(req, res){
-    console.log("def called")
+    //console.log("def called")
     let nums;
     
-    nums = new guessNum(req.query.index);
+    nums = guessNum(req.query.index);
+    tries = getNumTries();
+    
 
     
-    console.log("nums" + nums);
-    res.json({"num":nums});
+    //console.log({"num":nums});
+    res.json({"num":nums, "tries":tries});
     
     
 	
